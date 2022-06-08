@@ -1,17 +1,27 @@
-import React from "react";
-import Users from "../../companents/users/Users";
+import React from 'react';
+import {useNavigate} from "react-router-dom";
 
-class MainPage extends React.Component{
-    constructor(props) {
-        super(props);
+const  url = "https://jsonplaceholder.typicode.com/users"
+
+const MainPage = () => {
+    
+    const navigate = useNavigate();
+    
+    const getUsers = () => {
+        fetch(url).then(response => {
+            if(response.ok) {
+                navigate('/portfolio', {replace:true})
+            }
+        })
     }
-    render(){
-        return(
-            <>
-                <Users users={this.props.users}/>
-            </>
-        )
-    }
+
+    return (
+        <div>
+            <h1> Main Page</h1>
+
+            <button onClick={getUsers}>get users</button>
+        </div>
+    )
 }
 
-export default MainPage;
+export default MainPage
